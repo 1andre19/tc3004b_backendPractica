@@ -9,7 +9,7 @@ export const login = async (req, res) => {
         const data = await pool.query(text, values);
 
         if (data.rowCount === 0) {
-            res.status(400).json({message: "user not found", isLogin: false});
+            res.status(400).json({ message: "user not found", isLogin: false });
             return;
         }
 
@@ -22,7 +22,7 @@ export const login = async (req, res) => {
 
         const isLogin = (hash === storedHash);
 
-        const token = jwt.sign({sub: "1"}, process.env.JWT, {
+        const token = jwt.sign({ sub: data.rows[0].id }, process.env.JWT, {
             expiresIn: "1h",
         });
 
