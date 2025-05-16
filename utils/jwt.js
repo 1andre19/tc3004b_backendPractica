@@ -5,6 +5,12 @@ export const validateJWT = Router();
 
 validateJWT.use((req, res, next) => {
     let token = req.headers.authorization;
+
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+
+    
     if (!token) {
         res.status(401).json({ "messsage": "JWT required" });
         return;
