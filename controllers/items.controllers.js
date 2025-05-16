@@ -24,8 +24,8 @@ export const getItem = async (req, res) => {
 };
 
 export const postItem = async (req, res) => {
-    const text = `INSERT INTO items (id, name, price) values ($1, $2, $3)`;
-    const values = [req.body.id, req.body.name, req.body.price];
+    const text = `INSERT INTO items (name, price) values ($1, $2)`;
+    const values = [req.body.name, req.body.price];
     const data = await pool.query(text, values);
     res.status(200).json({ msg: "operation succesfull" });
 };
